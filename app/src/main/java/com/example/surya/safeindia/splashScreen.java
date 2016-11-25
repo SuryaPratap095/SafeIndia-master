@@ -47,7 +47,6 @@ public class splashScreen extends AppCompatActivity {
 
         }
     }
-
     public static void setDefault(String Key,boolean value,Context context){
         //sharedPreferences=PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor=sharedPreferences.edit();

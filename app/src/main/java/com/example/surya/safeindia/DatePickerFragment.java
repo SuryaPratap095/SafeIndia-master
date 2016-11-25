@@ -18,7 +18,6 @@ import java.util.Calendar;
 public class DatePickerFragment extends android.support.v4.app.DialogFragment implements DatePickerDialog.OnDateSetListener{
 
     public DatePickerFragment(){
-
     }
     private EditText activity_edittext;
     private TextView mtextView;

@@ -33,7 +33,6 @@ public class HomeTab extends AppCompatActivity implements TabLayout.OnTabSelecte
         viewPager.setAdapter(adapter);
 
         tabLayout.addOnTabSelectedListener(this);
-
     }
 
     @Override
@@ -41,7 +40,6 @@ public class HomeTab extends AppCompatActivity implements TabLayout.OnTabSelecte
         viewPager.setCurrentItem(tab.getPosition());
 
     }
-
     @Override
     public void onTabUnselected(TabLayout.Tab tab) {
 

@@ -80,7 +80,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //Location location = locationManager.getLastKnownLocation(locationManager
               //      .getBestProvider(criteria, false));
             Location myLocation=locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-
             boolean isGPSEnabled=locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             boolean isNWEnabled=locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
