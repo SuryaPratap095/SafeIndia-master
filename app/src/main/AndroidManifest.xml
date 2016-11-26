@@ -60,6 +60,9 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".UserForm" />
         <activity
+            android:name="ContactsTab"></activity>
+
+        <activity
             android:name=".UserForm1"
             android:label="@string/title_activity_user_form1">
 

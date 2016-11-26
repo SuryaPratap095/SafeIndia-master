@@ -21,8 +21,8 @@ public class Pager extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                ContactsTab contactsTab = new ContactsTab();
-                return contactsTab;
+              //  ContactsTab contactsTab = new ContactsTab();
+              //  return contactsTab;
             case 1:
                 FriendsTab friendsTab = new FriendsTab();
                 return friendsTab;

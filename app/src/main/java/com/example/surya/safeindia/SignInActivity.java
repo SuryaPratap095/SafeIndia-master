@@ -1,5 +1,6 @@
 package com.example.surya.safeindia;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -24,18 +25,38 @@ public class SignInActivity extends AppCompatActivity {
 
     DigitsAuthButton digitsAuthButton;
 
+    SharedPreferences preferences=this.getPreferences(Context.MODE_PRIVATE);
+    SharedPreferences.Editor editor=preferences.edit();
+
+    int newHighScore=10;
+
+    //    SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+//    SharedPreferences.Editor editor = sharedPref.edit();
+//    editor.putInt(getString(R.string.), newHighScore);
+//    editor.commit()
+
+    //editor = editor.putString("FirstLogin","True");
+  //  setEditor(editor);
+
+
+    public void setEditor(SharedPreferences.Editor editor) {
+        this.editor = editor.putString("FirstLogin","True");
+        editor.commit();
+    }
+
+
+
     public static boolean Activityaccess=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-//        Fabric.with(this, new TwitterCore(authConfig), new Digits());
-//        setContentView(R.layout.activity_sign_in);
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());
+        setContentView(R.layout.activity_sign_in);
 //
 //         digitsAuthButton=(DigitsAuthButton) findViewById(R.id.authButton);
 //        digitsAuthButton.setCallback(((Authenticate)getApplication()).getAuthCallback());
-
         DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
         digitsButton.setCallback(new AuthCallback() {
             @Override
@@ -44,11 +65,13 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Authentication successful for "
                         + phoneNumber, Toast.LENGTH_LONG).show();
             }
+
             @Override
             public void failure(DigitsException exception) {
                 Log.d("Digits", "Sign in with Digits failure", exception);
             }
         });
+
         if(Activityaccess){
             Intent intent=new Intent(SignInActivity.this,MapsActivity.class);
             SignInActivity.this.startActivity(intent);

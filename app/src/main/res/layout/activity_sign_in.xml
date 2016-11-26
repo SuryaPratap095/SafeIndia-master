@@ -10,9 +10,9 @@
     tools:context="com.example.surya.safeindia.SignInActivity">
 
     <com.digits.sdk.android.DigitsAuthButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/auth_button"
-        android:layout_alignParentBottom="true"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </RelativeLayout>

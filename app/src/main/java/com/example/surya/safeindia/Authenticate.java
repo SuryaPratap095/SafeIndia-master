@@ -22,18 +22,32 @@ import io.fabric.sdk.android.Fabric;
 public class Authenticate extends Application {
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "2cmsXIUANsuC3B8aS0VJp6dUY";
+    private static final String TWITTER_SECRET = "SX6YmIqxULTARRY5WihaBQnJ76QnlDmXGGCOC8gNw0LPvndVbQ";
+
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+ //  private static final String TWITTER_KEY = "2cmsXIUANsuC3B8aS0VJp6dUY";
+// private static final String TWITTER_SECRET = "SX6YmIqxULTARRY5WihaBQnJ76QnlDmXGGCOC8gNw0LPvndVbQ";
+
+
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
 
 
     public static boolean Activityaccess=false;
 
     private AuthCallback authCallback;
-    private static final String TWITTER_KEY = "2cmsXIUANsuC3B8aS0VJp6dUY";
-    private static final String TWITTER_SECRET = "SX6YmIqxULTARRY5WihaBQnJ76QnlDmXGGCOC8gNw0LPvndVbQ";
+  //  private static final String TWITTER_KEY = "2cmsXIUANsuC3B8aS0VJp6dUY";
+ //   private static final String TWITTER_SECRET = "SX6YmIqxULTARRY5WihaBQnJ76QnlDmXGGCOC8gNw0LPvndVbQ";
     public static String phone=null;
     @Override
     public void onCreate() {
         super.onCreate();
+
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());   //  TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+  //      Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());
+     //   TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
     //    Fabric.with(this, new TwitterCore(authConfig), new Digits());
         //Fabric.with(this,new TwitterCore(authConfig), new Digits());
 //        final TwitterAuthConfig authConfig=new TwitterAuthConfig(TWITTER_KEY,TWITTER_SECRET);
