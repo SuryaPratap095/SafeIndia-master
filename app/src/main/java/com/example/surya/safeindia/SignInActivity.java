@@ -25,8 +25,7 @@ public class SignInActivity extends AppCompatActivity {
 
     DigitsAuthButton digitsAuthButton;
 
-    SharedPreferences preferences=this.getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor=preferences.edit();
+    SharedPreferences preferences;
 
     int newHighScore=10;
 
@@ -39,10 +38,7 @@ public class SignInActivity extends AppCompatActivity {
   //  setEditor(editor);
 
 
-    public void setEditor(SharedPreferences.Editor editor) {
-        this.editor = editor.putString("FirstLogin","True");
-        editor.commit();
-    }
+
 
 
 
@@ -54,6 +50,12 @@ public class SignInActivity extends AppCompatActivity {
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());
         setContentView(R.layout.activity_sign_in);
+
+
+        preferences=this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor=preferences.edit();
+        editor.putString("FirstLogin","True");
+        editor.commit();
 //
 //         digitsAuthButton=(DigitsAuthButton) findViewById(R.id.authButton);
 //        digitsAuthButton.setCallback(((Authenticate)getApplication()).getAuthCallback());
