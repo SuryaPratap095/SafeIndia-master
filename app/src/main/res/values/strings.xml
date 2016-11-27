@@ -15,5 +15,11 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."</string>
-    <String name="saved_high_score">High Sore saved</String>
+    <string name="FirstLogin">FirstLogin</string>
+    <string name="title_activity_map_drawer">MapDrawer</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>

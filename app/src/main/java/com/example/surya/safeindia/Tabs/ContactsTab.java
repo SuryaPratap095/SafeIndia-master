@@ -1,4 +1,4 @@
-package com.example.surya.safeindia;
+package com.example.surya.safeindia.Tabs;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.surya.safeindia.R;
 
 /**
  * Created by surya on 27/7/16.

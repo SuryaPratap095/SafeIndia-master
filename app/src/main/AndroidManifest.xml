@@ -39,7 +39,7 @@
             android:name="io.fabric.ApiKey"
             android:value="3710083e6321da12d98e05866319eed28c82a6f1" />
 
-        <activity android:name=".MapActivity" />
+        <activity android:name=".Tabs.MapActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -56,21 +56,25 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".HomeTab"
+            android:name=".Tabs.HomeTab"
             android:theme="@style/AppTheme" />
-        <activity android:name=".UserForm" />
-        <activity
-            android:name="ContactsTab"></activity>
-
+        <activity android:name=".Tabs.UserForm" />
+        <activity android:name=".Tabs.ContactsTab" />
         <activity
             android:name=".UserForm1"
-            android:label="@string/title_activity_user_form1">
-
-        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:label="@string/title_activity_user_form1"></activity>
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".MapDrawer"
+            android:label="@string/title_activity_map_drawer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

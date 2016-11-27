@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.surya.safeindia.Tabs.FriendsTab;
+import com.example.surya.safeindia.Tabs.MapTab;
+
 /**
  * Created by surya on 27/7/16.
  */

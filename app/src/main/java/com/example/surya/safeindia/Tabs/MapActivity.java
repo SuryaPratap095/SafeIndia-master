@@ -1,7 +1,9 @@
-package com.example.surya.safeindia;
+package com.example.surya.safeindia.Tabs;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.surya.safeindia.R;
 
 public class MapActivity extends AppCompatActivity {
     @Override

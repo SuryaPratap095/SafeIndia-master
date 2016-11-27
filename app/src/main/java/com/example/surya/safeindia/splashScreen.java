@@ -21,7 +21,10 @@ public class splashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-       if(!splashScreen.getDefault("FirstName",this)) {
+        preferences=this.getSharedPreferences(getString(R.string.FirstLogin),Context.MODE_PRIVATE);
+
+
+       if(!preferences.contains(getString(R.string.FirstLogin))) {
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -39,7 +42,7 @@ public class splashScreen extends AppCompatActivity {
                @Override
                public void run() {
 
-                   Intent intent = new Intent(splashScreen.this,UserForm1.class);
+                   Intent intent = new Intent(splashScreen.this,MapDrawer.class);
                    splashScreen.this.startActivity(intent);
                    splashScreen.this.finish();
                }

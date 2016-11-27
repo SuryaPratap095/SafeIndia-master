@@ -25,7 +25,7 @@ public class SignInActivity extends AppCompatActivity {
 
     DigitsAuthButton digitsAuthButton;
 
-    SharedPreferences preferences;
+    public SharedPreferences preferences;
 
     int newHighScore=10;
 
@@ -54,7 +54,8 @@ public class SignInActivity extends AppCompatActivity {
 
         preferences=this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
-        editor.putString("FirstLogin","True");
+        //editor.putBoolean("ActvityAccess",Activityaccess);
+        editor.putString(getString(R.string.FirstLogin),"True");
         editor.commit();
 //
 //         digitsAuthButton=(DigitsAuthButton) findViewById(R.id.authButton);
@@ -91,9 +92,9 @@ public class SignInActivity extends AppCompatActivity {
         super.onRestart();
         if(Authenticate.phone!=null) {
 
-            Intent intent = new Intent(this,UserForm1.class);
+            Intent intent = new Intent(this,MapsActivity.class);
             this.startActivity(intent);
-            splashScreen.setDefault("FirstName",true,this);
+            //splashScreen.setDefault("FirstName",true,this);
             SignInActivity.this.finish();
         }
     }

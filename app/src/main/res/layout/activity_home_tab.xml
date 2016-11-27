@@ -6,7 +6,7 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    tools:context="com.example.surya.safeindia.HomeTab">
+    tools:context="com.example.surya.safeindia.Tabs.HomeTab">
 
     <!-- our toolbar -->
     <android.support.v7.widget.Toolbar
