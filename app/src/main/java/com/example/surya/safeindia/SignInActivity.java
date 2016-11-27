@@ -16,6 +16,7 @@ import com.digits.sdk.android.DigitsSession;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import io.fabric.sdk.android.Fabric;
+import com.example.surya.safeindia.splashScreen;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class SignInActivity extends AppCompatActivity {
 
     DigitsAuthButton digitsAuthButton;
 
-    public SharedPreferences preferences;
+
 
     int newHighScore=10;
 
@@ -52,11 +53,19 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
 
-        preferences=this.getPreferences(Context.MODE_PRIVATE);
+      SharedPreferences  preferences=getApplicationContext().getSharedPreferences("FirstLogin",Context.MODE_PRIVATE);
+        //preferences=this.getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor=preferences.edit();
         //editor.putBoolean("ActvityAccess",Activityaccess);
         editor.putString(getString(R.string.FirstLogin),"True");
-        editor.commit();
+        editor.apply();
+
+        String defaultVale=preferences.getString("FirstLogin","No Name defined");
+
+
+        if(preferences.contains(getString(R.string.FirstLogin))){
+            Toast.makeText(this,defaultVale.toString(),Toast.LENGTH_LONG).show();
+        }
 //
 //         digitsAuthButton=(DigitsAuthButton) findViewById(R.id.authButton);
 //        digitsAuthButton.setCallback(((Authenticate)getApplication()).getAuthCallback());
