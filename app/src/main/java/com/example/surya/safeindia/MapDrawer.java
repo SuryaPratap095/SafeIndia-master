@@ -2,15 +2,21 @@ package com.example.surya.safeindia;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.media.audiofx.BassBoost;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,6 +30,8 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MapDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
@@ -151,7 +159,58 @@ public class MapDrawer extends AppCompatActivity
             boolean isNwEnabled=locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
 
+            if(isNwEnabled){
+                AlertDialog.Builder dialog=new AlertDialog.Builder(this);
+                dialog.setMessage("Please select Network");
+                dialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivityForResult(intent,100);
+                    }
+                });
 
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                dialog.show();
+                Log.e("Current Location", "Current Lat Lng is Null");
+            }
+            else {
+
+
+                if (isGpsEnabled)
+                {
+                    if (mylocation == null) {
+                        if (locationManager != null) {
+                            mylocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            double latitude = mylocation.getLatitude();
+                            double longitude = mylocation.getLongitude();
+
+                            LatLng latLng = new LatLng(latitude, longitude);
+
+                            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                            CameraPosition cameraPosition=new CameraPosition.Builder().target(latLng).zoom(12).build();
+                        }
+
+                    }
+
+
+                }
+                else{
+                    if(isNwEnabled){
+                        mylocation=locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        double latitude=mylocation.getLatitude();
+                        double longitude = mylocation.getLongitude();
+                        LatLng latlng = new LatLng(latitude, longitude);
+                    }
+
+                }
+            }
 
 
         }catch(Exception ex){
