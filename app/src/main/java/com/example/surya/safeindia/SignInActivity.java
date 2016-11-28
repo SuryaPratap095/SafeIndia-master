@@ -53,12 +53,9 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
 
-      SharedPreferences  preferences=getApplicationContext().getSharedPreferences("FirstLogin",Context.MODE_PRIVATE);
+      final SharedPreferences  preferences=getApplicationContext().getSharedPreferences("FirstLogin",Context.MODE_PRIVATE);
         //preferences=this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor=preferences.edit();
-        //editor.putBoolean("ActvityAccess",Activityaccess);
-        editor.putString(getString(R.string.FirstLogin),"True");
-        editor.apply();
+
 
         String defaultVale=preferences.getString("FirstLogin","No Name defined");
 
@@ -76,6 +73,9 @@ public class SignInActivity extends AppCompatActivity {
                 // TODO: associate the session userID with your user model
                 Toast.makeText(getApplicationContext(), "Authentication successful for "
                         + phoneNumber, Toast.LENGTH_LONG).show();
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.putString(getString(R.string.FirstLogin),"True");
+                editor.apply();
             }
 
             @Override
@@ -84,8 +84,8 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-        if(Activityaccess){
-            Intent intent=new Intent(SignInActivity.this,MapsActivity.class);
+        if(preferences.contains("FirstLogin")){
+            Intent intent=new Intent(SignInActivity.this,UserForm1.class);
             SignInActivity.this.startActivity(intent);
             SignInActivity.this.finish();
         }
