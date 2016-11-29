@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -44,7 +45,10 @@ public class MapDrawer extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_drawer);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+//        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.newMap);
+//        mapFragment.getMapAsync(this);
+
+        MapFragment mapFragment=(MapFragment)getFragmentManager().findFragmentById(R.id.Newmap);
         mapFragment.getMapAsync(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

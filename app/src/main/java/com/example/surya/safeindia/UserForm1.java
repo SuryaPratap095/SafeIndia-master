@@ -114,7 +114,7 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
             }
         });
 
-        mdateText = (TextView) findViewById(R.id.dateDob);
+        mdateText= (TextView) findViewById(R.id.dateDob);
         mdateText.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
