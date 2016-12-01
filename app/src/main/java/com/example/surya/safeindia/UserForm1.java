@@ -58,6 +58,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.example.surya.safeindia.config;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -89,6 +91,9 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
     private View mLoginFormView;
     private  EditText mdatePicker;
     private TextView mdateText;
+    private UserPOJO userPOJO;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseRefernce;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -187,48 +192,55 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
 
             Toast.makeText(this, "Login in DB", Toast.LENGTH_LONG).show();
             return;
+        }else{
+
+            userPOJO=new UserPOJO();
+            userPOJO.setFirstName(mEmailView.getResources().toString());
+            userPOJO.setLastName(mEmailView.getResources().toString());
+            userPOJO.setGender("Male");
+            userPOJO.setDOB("01/12/2016");
         }
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-        }
+//        mEmailView.setError(null);
+//        mPasswordView.setError(null);
+//
+//        // Store values at the time of the login attempt.
+//        String email = mEmailView.getText().toString();
+//        String password = mPasswordView.getText().toString();
+//
+//        boolean cancel = false;
+//        View focusView = null;
+//
+//        // Check for a valid password, if the user entered one.
+//        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+//            mPasswordView.setError(getString(R.string.error_invalid_password));
+//            focusView = mPasswordView;
+//            cancel = true;
+//        }
+//
+//        // Check for a valid email address.
+//        if (TextUtils.isEmpty(email)) {
+//            mEmailView.setError(getString(R.string.error_field_required));
+//            focusView = mEmailView;
+//            cancel = true;
+//        } else if (!isEmailValid(email)) {
+//            mEmailView.setError(getString(R.string.error_invalid_email));
+//            focusView = mEmailView;
+//            cancel = true;
+//        }
+//
+//        if (cancel) {
+//            // There was an error; don't attempt login and focus the first
+//            // form field with an error.
+//            focusView.requestFocus();
+//        } else {
+//            // Show a progress spinner, and kick off a background task to
+//            // perform the user login attempt.
+//            showProgress(true);
+//            mAuthTask = new UserLoginTask(email, password);
+//            mAuthTask.execute((Void) null);
+//        }
     }
 
     private boolean isEmailValid(String email) {
@@ -447,6 +459,7 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
         private void showJSON(String json){
             JSONParser jsonParser=new JSONParser(json);
             Toast.makeText(UserForm1.this, "Successfull Login", Toast.LENGTH_LONG).show();
+
 
             //jsonParser.parse
 
