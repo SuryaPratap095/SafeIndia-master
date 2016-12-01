@@ -14,4 +14,7 @@ public class config {
     public static final String Key_DOB="DOB";
 
 
+    public static final String FIREBASE_URL="https://sampleproject-26ab6.firebaseio.com/";
+
+
 }
