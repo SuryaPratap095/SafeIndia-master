@@ -1,5 +1,6 @@
 package com.example.surya.safeindia;
 
+import com.example.surya.safeindia.config;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
@@ -92,7 +93,7 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
     private  EditText mdatePicker;
     private TextView mdateText;
     private UserPOJO userPOJO;
-    private FirebaseDatabase firebaseDatabase;
+     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseRefernce;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -131,7 +132,26 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+
+                Toast.makeText(getApplicationContext(),"In onClick ",Toast.LENGTH_SHORT).show();
+
+                userPOJO=new UserPOJO();
+                userPOJO.setFirstName(mEmailView.getResources().toString());
+                userPOJO.setLastName(mEmailView.getResources().toString());
+                userPOJO.setGender("Male");
+                userPOJO.setDOB("01/12/2016");
+
+               // firebaseDatabase=FirebaseDatabase.getInstance();
+                firebaseDatabase=FirebaseDatabase.getInstance();
+
+                databaseRefernce=firebaseDatabase.getReference("User");
+
+
+                String userId=databaseRefernce.push().getKey();
+                UserPOJO userPOJO=new UserPOJO("Surya","Pratap","Male","01/12/2016");
+                databaseRefernce.child("User").setValue(userPOJO);
+
+                //attemptLogin();
             }
         });
 
@@ -199,6 +219,15 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
             userPOJO.setLastName(mEmailView.getResources().toString());
             userPOJO.setGender("Male");
             userPOJO.setDOB("01/12/2016");
+
+            firebaseDatabase=FirebaseDatabase.getInstance();
+            databaseRefernce=firebaseDatabase.getReference("User");
+
+
+            String userId=databaseRefernce.push().getKey();
+            UserPOJO userPOJO=new UserPOJO("Surya","Pratap","Male","01/12/2016");
+            databaseRefernce.child(userId).setValue(userPOJO);
+
         }
 
         // Reset errors.

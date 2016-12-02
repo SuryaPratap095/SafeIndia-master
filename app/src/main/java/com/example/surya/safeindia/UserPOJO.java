@@ -27,8 +27,20 @@ public class UserPOJO {
         LastName = lastName;
     }
 
+    public UserPOJO() {
+    }
+
+    public UserPOJO(String firstName, String lastName, String gender, String DOB) {
+
+        FirstName = firstName;
+        LastName = lastName;
+        Gender = gender;
+        this.DOB = DOB;
+    }
+
     public String getGender() {
         return Gender;
+
     }
 
     public void setGender(String gender) {
