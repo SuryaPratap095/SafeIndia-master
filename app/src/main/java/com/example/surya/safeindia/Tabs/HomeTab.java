@@ -35,7 +35,7 @@ public class HomeTab extends AppCompatActivity implements TabLayout.OnTabSelecte
 
         viewPager.setAdapter(adapter);
 
-        tabLayout.addOnTabSelectedListener(this);
+        //tabLayout.addOnTabSelectedListener(this);
     }
 
     @Override

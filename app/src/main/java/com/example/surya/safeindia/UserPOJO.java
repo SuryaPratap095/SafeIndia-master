@@ -4,12 +4,35 @@ package com.example.surya.safeindia;
  * Created by surya.solanki on 01-12-2016.
  */
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
+
+@IgnoreExtraProperties
 public class UserPOJO {
 
     private String FirstName;
     private String LastName;
     private String Gender;
+
+    public UserPOJO(String firstName, String lastName, String gender, String DOB, String phoneNumber) {
+        FirstName = firstName;
+        LastName = lastName;
+        Gender = gender;
+        this.DOB = DOB;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     private String DOB;
+    private String phoneNumber;
 
     public String getFirstName() {
         return FirstName;

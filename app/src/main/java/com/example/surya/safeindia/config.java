@@ -15,6 +15,7 @@ public class config {
 
 
     public static final String FIREBASE_URL="https://sampleproject-26ab6.firebaseio.com/";
+    public   static final String TAG=UserFireBase.class.getSimpleName();
 
 
 }

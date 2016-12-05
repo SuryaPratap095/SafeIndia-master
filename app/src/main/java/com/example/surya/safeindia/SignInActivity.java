@@ -18,13 +18,17 @@ import com.twitter.sdk.android.core.TwitterCore;
 import io.fabric.sdk.android.Fabric;
 import com.example.surya.safeindia.splashScreen;
 
+
+
 public class SignInActivity extends AppCompatActivity {
+
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "2cmsXIUANsuC3B8aS0VJp6dUY";
     private static final String TWITTER_SECRET = "SX6YmIqxULTARRY5WihaBQnJ76QnlDmXGGCOC8gNw0LPvndVbQ";
 
     DigitsAuthButton digitsAuthButton;
+    public static String phoneNumber;
 
 
 
@@ -44,6 +48,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
     public static boolean Activityaccess=false;
+    public SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +58,7 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
 
-      final SharedPreferences  preferences=getApplicationContext().getSharedPreferences("FirstLogin",Context.MODE_PRIVATE);
+      this.preferences=getApplicationContext().getSharedPreferences("FirstLogin",Context.MODE_PRIVATE);
         //preferences=this.getPreferences(Context.MODE_PRIVATE);
 
 
@@ -71,11 +76,14 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
                 // TODO: associate the session userID with your user model
+
                 Toast.makeText(getApplicationContext(), "Authentication successful for "
                         + phoneNumber, Toast.LENGTH_LONG).show();
+                SignInActivity.phoneNumber=phoneNumber;
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.putString(getString(R.string.FirstLogin),"True");
                 editor.apply();
+                startUserFireBase();
             }
 
             @Override
@@ -84,11 +92,7 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-        if(preferences.contains("FirstLogin")){
-            Intent intent=new Intent(SignInActivity.this,UserForm1.class);
-            SignInActivity.this.startActivity(intent);
-            SignInActivity.this.finish();
-        }
+
      //   AuthCallback authCallback=((Authenticate) getApplication()).getAuthCallback();
 
 //        Intent intent=new Intent(SignInActivity.this,MapActivity.class);
@@ -99,12 +103,23 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        if(Authenticate.phone!=null) {
+      //  if(preferences.contains("FirstLogin")) {
 
-            Intent intent = new Intent(this,MapsActivity.class);
-            this.startActivity(intent);
+            Intent intent = new Intent(this,MapDrawer.class);
+
+            startActivity(intent);
             //splashScreen.setDefault("FirstName",true,this);
-            SignInActivity.this.finish();
-        }
+
+        //}
+    }
+
+
+     public void startUserFireBase(){
+
+             Intent intent=new Intent(SignInActivity.this,UserFireBase.class);
+             intent.putExtra("phoneNumber",phoneNumber);
+             SignInActivity.this.startActivity(intent);
+             SignInActivity.this.finish();
+
     }
 }

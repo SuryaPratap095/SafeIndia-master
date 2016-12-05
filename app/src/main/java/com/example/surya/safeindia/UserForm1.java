@@ -48,10 +48,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
+//import com.google.android.gms.appindexing.Action;
+//import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.server.converter.StringToIntConverter;
+//import com.google.android.gms.common.server.converter.StringToIntConverter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -86,8 +86,8 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
      */
     private UserLoginTask mAuthTask = null;
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private AutoCompleteTextView FirstName;
+    private EditText LastName;
     private View mProgressView;
     private View mLoginFormView;
     private  EditText mdatePicker;
@@ -105,11 +105,18 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_form1);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseRefernce=firebaseDatabase.getReference("Users");
+
+        FirstName = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        LastName = (EditText) findViewById(R.id.password);
+        LastName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
@@ -135,16 +142,13 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
 
                 Toast.makeText(getApplicationContext(),"In onClick ",Toast.LENGTH_SHORT).show();
 
-                userPOJO=new UserPOJO();
-                userPOJO.setFirstName(mEmailView.getResources().toString());
-                userPOJO.setLastName(mEmailView.getResources().toString());
-                userPOJO.setGender("Male");
-                userPOJO.setDOB("01/12/2016");
+
 
                // firebaseDatabase=FirebaseDatabase.getInstance();
-                firebaseDatabase=FirebaseDatabase.getInstance();
 
-                databaseRefernce=firebaseDatabase.getReference("User");
+
+                firebaseDatabase.getReference("App_title").setValue("Safe India");
+
 
 
                 String userId=databaseRefernce.push().getKey();
@@ -159,7 +163,7 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
         mProgressView = findViewById(R.id.login_progress);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
     }
     private void populateAutoComplete() {
@@ -176,7 +180,7 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(LastName, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -215,8 +219,8 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
         }else{
 
             userPOJO=new UserPOJO();
-            userPOJO.setFirstName(mEmailView.getResources().toString());
-            userPOJO.setLastName(mEmailView.getResources().toString());
+            userPOJO.setFirstName(FirstName.getResources().toString());
+            userPOJO.setLastName(LastName.getResources().toString());
             userPOJO.setGender("Male");
             userPOJO.setDOB("01/12/2016");
 
@@ -342,6 +346,7 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
             cursor.moveToNext();
         }
         addEmailsToAutoComplete(emails);
+        cursor.close();
     }
 
     @Override
@@ -355,7 +360,7 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
                 new ArrayAdapter<>(UserForm1.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        //mEmailView.setAdapter(adapter);
     }
 
     @Override
@@ -365,17 +370,17 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "UserForm1 Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.surya.safeindia/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+//        Action viewAction = Action.newAction(
+//                Action.TYPE_VIEW, // TODO: choose an action type.
+//                "UserForm1 Page", // TODO: Define a title for the content shown.
+//                // TODO: If you have web page content that matches this app activity's content,
+//                // make sure this auto-generated web page URL is correct.
+//                // Otherwise, set the URL to null.
+//                Uri.parse("http://host/path"),
+//                // TODO: Make sure this auto-generated app URL is correct.
+//                Uri.parse("android-app://com.example.surya.safeindia/http/host/path")
+//        );
+//        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
@@ -383,18 +388,18 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
         super.onStop();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "UserForm1 Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.example.surya.safeindia/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+//        Action viewAction = Action.newAction(
+//                Action.TYPE_VIEW, // TODO: choose an action type.
+//                "UserForm1 Page", // TODO: Define a title for the content shown.
+//                // TODO: If you have web page content that matches this app activity's content,
+//                // make sure this auto-generated web page URL is correct.
+//                // Otherwise, set the URL to null.
+//                Uri.parse("http://host/path"),
+//                // TODO: Make sure this auto-generated app URL is correct.
+//                Uri.parse("android-app://com.example.surya.safeindia/http/host/path")
+//        );
+//        AppIndex.AppIndexApi.end(client, viewAction);
+//        client.disconnect();
     }
     public void showDatePickerDialog() {
 
@@ -471,6 +476,8 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 return false;
+            }finally{
+
             }
 
             for (String credential : DUMMY_CREDENTIALS) {
@@ -502,8 +509,8 @@ public class UserForm1 extends AppCompatActivity implements LoaderCallbacks<Curs
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                LastName.setError(getString(R.string.error_incorrect_password));
+                LastName.requestFocus();
             }
         }
 
