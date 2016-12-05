@@ -33,6 +33,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
@@ -221,6 +222,7 @@ public class MapDrawer extends AppCompatActivity
                         double latitude=mylocation.getLatitude();
                         double longitude = mylocation.getLongitude();
                         LatLng latlng = new LatLng(latitude, longitude);
+                        googleMap.addMarker(new MarkerOptions().position(latlng).title("Hello"));
                     }
 
                 }
